@@ -346,14 +346,11 @@ class StickyParallaxHeader extends Component {
       headerStyle.map((el) => Object.assign(arrayHeaderStyle, el));
     }
 
-    const scrollViewMinHeight = Dimensions.get('window').height + parallaxHeight - headerHeight;
+    const scrollViewMinHeight =  100;
     const innerScrollHeight = Dimensions.get('window').height - headerHeight - parallaxHeight;
 
     const shouldRenderTabs = tabs && tabs.length > 0;
     const shouldUseBgColor = contentContainerStyles && contentContainerStyles.backgroundColor;
-
-    const hasSingleTab = tabs?.length === 1 || false;
-    const hasSingleElement = hasSingleTab || (!tabs && children !== undefined);
 
     return (
       <View style={styles.container}>
@@ -370,7 +367,7 @@ class StickyParallaxHeader extends Component {
             setRef(scrollRef, c);
           }}
           contentContainerStyle={{
-            minHeight: scrollViewMinHeight,
+            minHeight: 100,
             backgroundColor: shouldUseBgColor,
           }}
           onScrollEndDrag={() => this.onScrollEndSnapToEdge(scrollHeight)}
@@ -397,22 +394,8 @@ class StickyParallaxHeader extends Component {
               },
             }
           )}>
-          <View style={{ height: parallaxHeight }} onLayout={(e) => this.onLayout(e)}>
-            <View
-              style={[
-                styles.overScrollPadding,
-                {
-                  backgroundColor: isArray
-                    ? arrayHeaderStyle.backgroundColor
-                    : headerStyle?.backgroundColor,
-                },
-              ]}
-            />
-            {backgroundImage
-              ? this.renderImageBackground(scrollHeight)
-              : this.renderPlainBackground(scrollHeight)}
-            {this.renderForeground(scrollHeight)}
-          </View>
+         
+          {this.renderForeground(10)}
           {shouldRenderTabs && this.renderTabs()}
           <ScrollableTabView
             contentContainerStyles={contentContainerStyles}
@@ -425,7 +408,6 @@ class StickyParallaxHeader extends Component {
             scrollHeight={scrollHeight}
             isHeaderFolded={isFolded}
             minScrollHeight={innerScrollHeight}
-            scrollEnabled={!hasSingleElement}
             keyboardShouldPersistTaps={keyboardShouldPersistTaps}>
             {!tabs && children}
             {tabs &&

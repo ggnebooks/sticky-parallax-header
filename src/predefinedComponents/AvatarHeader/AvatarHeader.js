@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, Animated, StatusBar, ViewPropTypes, ScrollView } from 'react-native';
-import { func, string, number, bool, oneOfType, oneOf, instanceOf, element, shape } from 'prop-types';
+import { Text, View, Image, TouchableOpacity, Animated, StatusBar } from 'react-native';
+import { func, string, number, bool, oneOfType } from 'prop-types';
 import StickyParallaxHeader from '../../index';
 import { constants, sizes } from '../../constants';
 import styles from './AvatarHeader.styles';
@@ -197,7 +197,6 @@ class AvatarHeader extends React.Component {
     const {
       backgroundColor,
       backgroundImage,
-      contentContainerStyles,
       renderBody,
       headerHeight,
       snapToEdge,
@@ -208,16 +207,12 @@ class AvatarHeader extends React.Component {
       snapStopThreshold,
       snapValue,
       transparentHeader,
-      scrollRef,
-      keyboardShouldPersistTaps,
-      refreshControl,
     } = this.props;
 
     return (
       <>
         <StatusBar backgroundColor={backgroundColor} barStyle="light-content" />
         <StickyParallaxHeader
-          contentContainerStyles={contentContainerStyles}
           foreground={this.renderForeground()}
           header={this.renderHeader()}
           deviceWidth={constants.deviceWidth}
@@ -235,10 +230,7 @@ class AvatarHeader extends React.Component {
           transparentHeader={transparentHeader}
           snapStartThreshold={snapStartThreshold}
           snapStopThreshold={snapStopThreshold}
-          snapValue={snapValue}
-          scrollRef={scrollRef}
-          keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-          refreshControl={refreshControl}>
+          snapValue={snapValue}>
           {renderBody(Brandon)}
         </StickyParallaxHeader>
       </>
@@ -252,12 +244,11 @@ AvatarHeader.propTypes = {
   snapToEdge: bool,
   leftTopIconOnPress: func,
   rightTopIconOnPress: func,
-  leftTopIcon: Image.propTypes.source,
-  rightTopIcon: Image.propTypes.source,
+  leftTopIcon: number,
+  rightTopIcon: number,
   backgroundColor: string,
   headerHeight: number,
   backgroundImage: Image.propTypes.source,
-  contentContainerStyles: ViewPropTypes.style,
   title: string,
   subtitle: string,
   image: Image.propTypes.source,
@@ -270,9 +261,6 @@ AvatarHeader.propTypes = {
   snapStopThreshold: oneOfType([bool, number]),
   snapValue: oneOfType([bool, number]),
   transparentHeader: bool,
-  scrollRef: oneOfType([func, shape({ current: instanceOf(ScrollView) })]),
-  keyboardShouldPersistTaps: oneOf(['never', 'always', 'handled', false, true, undefined]),
-  refreshControl: element,
 };
 AvatarHeader.defaultProps = {
   leftTopIconOnPress: () => {},
@@ -282,7 +270,6 @@ AvatarHeader.defaultProps = {
   backgroundColor: Brandon.color,
   headerHeight: sizes.userModalHeaderHeight,
   backgroundImage: null,
-  contentContainerStyles: {},
   title: Brandon.author,
   subtitle: Brandon.about,
   image: Brandon.image,
@@ -292,9 +279,6 @@ AvatarHeader.defaultProps = {
   hasBorderRadius: true,
   parallaxHeight: sizes.userScreenParallaxHeader,
   transparentHeader: false,
-  scrollRef: null,
-  keyboardShouldPersistTaps: undefined,
-  refreshControl: undefined,
 };
 
 export default AvatarHeader;

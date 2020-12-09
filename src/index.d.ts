@@ -38,8 +38,6 @@ export interface SharedProps {
   headerHeight?: number;
   snapToEdge?: boolean;
   bounces?: boolean;
-  contentContainerStyles?: ViewStyle;
-  refreshControl?: ReactElement;
 }
 
 export interface IconProps {

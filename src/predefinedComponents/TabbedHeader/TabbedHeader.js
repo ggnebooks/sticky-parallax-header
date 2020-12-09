@@ -88,10 +88,7 @@ export default class TabbedHeader extends React.Component {
       if (foregroundImage !== null) {
         return (
           <Animated.View style={{ opacity: imageOpacity }}>
-            <Animated.Image
-              source={logo}
-              style={[styles.profilePic, { width: imageSize, height: imageSize }]}
-            />
+             
           </Animated.View>
         );
       }
@@ -180,7 +177,7 @@ export default class TabbedHeader extends React.Component {
           tabTextContainerActiveStyle={tabTextContainerActiveStyle}
           tabsContainerBackgroundColor={backgroundColor}
           tabWrapperStyle={tabWrapperStyle}
-          backgroundImage={backgroundImage}
+     
           bounces={bounces}
           snapToEdge={snapToEdge}
           tabsContainerStyle={tabsContainerStyle}
